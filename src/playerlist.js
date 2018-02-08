@@ -5,11 +5,13 @@ import PlayerEntry from './playerentry.js';
 class PlayerList extends Component {
   constructor(props) {
     super(props);
+    this.entries = [];
+  }
 
-    console.dir(props);
+  componentWillReceiveProps(nextProps) {
     const entries = [];
 
-    for (let i = 0; i < props.count; ++i) {
+    for (let i = 0; i < nextProps.count; ++i) {
       entries.push(
         <li key={i.toString()}>
           <PlayerEntry />
@@ -17,11 +19,11 @@ class PlayerList extends Component {
       );
     }
 
-    this.state = { entries };
+    this.entries = entries;
   }
 
   render() {
-    return <ul>{this.state.entries}</ul>;
+    return <ul>{this.entries}</ul>;
   }
 }
 
