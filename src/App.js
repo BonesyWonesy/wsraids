@@ -2,80 +2,89 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-import PlayerList from './playerlist.js';
+import { Button, Panel, Modal } from 'react-bootstrap';
+import RaidReport from './RaidReport.js';
+import Content from './Content.js';
 
 let playerCount = 0;
 let raidedPrior = false;
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
-      playerCount: 0
+      contentType: 'none'
     };
 
-    this.incrementPlayerCount = this.incrementPlayerCount.bind(this);
-    this.decrementPlayerCount = this.decrementPlayerCount.bind(this);
+    this.dismissModal = this.dismissModal.bind(this);
   }
-
-  incrementPlayerCount(e) {
-    this.setState(prevState => {
-      return {
-        playerCount: prevState.playerCount + 1
-      };
-    });
-  }
-
-  decrementPlayerCount(e) {
-    this.setState(prevState => {
-      return {
-        playerCount: prevState.playerCount <= 0 ? 0 : prevState.playerCount - 1
-      };
-    });
-  }
-
   componentDidMount() {}
 
   componentWillUnmount() {}
 
-  submitReport() {}
+  dismissModal() {
+    this.switchContent('info');
+  }
+
+  switchContent(type) {
+    this.setState({
+      contentType: type
+    });
+  }
 
   render() {
     return (
       <div>
         <div className="App">
           <header className="App-header">
+            West Seattle Raids <br />
             <img src={logo} className="App-logo" alt="logo" />
           </header>
-          <div className="App-intro" />
         </div>
-
-        <div>
-          Number of Raiders: {this.state.playerCount}
-          {'     '}
-          <button className="DecrementPlayerCount" onClick={this.decrementPlayerCount}>
-            -
-          </button>
-          <button className="IncrementPlayerCount" onClick={this.incrementPlayerCount}>
-            +
-          </button>
-          <br />
-          Player names & Team
-          <br />
-          <PlayerList count={this.state.playerCount} />
-        </div>
-        <div>
-          <button className="Submit" onClick={this.submitReport}>
+        <div className="text-center">
+          <Button
+            bsStyle="primary"
+            onClick={() => {
+              this.switchContent('info');
+            }}
+          >
             {' '}
-            Submit
-          </button>
+            Raid Info{' '}
+          </Button>
+          <Button
+            bsStyle="default"
+            onClick={() => {
+              this.switchContent('submit');
+            }}
+          >
+            Submit Report
+          </Button>
         </div>
+        <br />
+        <Content type={this.state.contentType} />
+        <Modal show={this.state.contentType === 'none'}>
+          <Modal.Body>
+            <Panel bsStyle="success">
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">Purpose</Panel.Title>
+              </Panel.Heading>
+              <Panel.Body>
+                <p>
+                  The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an EX raid
+                  for that gym.
+                </p>
+                <p> This page provides info about the currently targeted gym and stats.</p>
+                <p> If you'd like to contribute to the stats, please fill out a really quick report.</p>
+                <div className="text-center">
+                  <Button onClick={this.dismissModal}>Dismiss</Button>{' '}
+                </div>
+              </Panel.Body>
+            </Panel>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
