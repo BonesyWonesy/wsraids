@@ -58,12 +58,10 @@ class RaidReport extends React.Component {
     const values = getFormData(e.target);
 
     if (this.state.playerCount === 1) {
-      console.log("1 player registered:", values);
       return;
     }
 
     const data = this.createDataCollection(values);
-    console.log(`${this.state.playerCount} players registered:`, data);
   };
 
   render() {
