@@ -25,41 +25,45 @@ class RaidReport extends React.Component {
     this.setState(prevState => ({ playerCount: prevState.playerCount + change }));
   };
 
+  /**
+   * loop through an empty array of the same length as the player count and
+   * fill it with the data from the form.
+   *
+   * from:
+   *  {
+   *    "one": ["a", "b"],
+   *    "two": ["c", "d"],
+   *  }
+   *
+   * to:
+   *  [
+   *    { one: "a", two: "c" },
+   *    { ohe: "b", two: "d" }
+   *  ]
+   */
+  createDataCollection = values => {
+    const data = new Array(this.state.playerCount).fill(0).map((l, index) => {
+      const output = Object.keys(values).reduce((acc, key) => {
+        return { ...acc, [key]: values[key][index] };
+      }, {});
+
+      return output;
+    });
+
+    return data;
+  };
+
   submitReport = e => {
     e.preventDefault();
     const values = getFormData(e.target);
-    const { playerCount } = this.state;
 
-    if (playerCount === 1) {
+    if (this.state.playerCount === 1) {
       console.log("1 player registered:", values);
       return;
     }
 
-    /**
-     * loop through an empty array of the same length as the player count and
-     * fill it with the data from the form.
-     *
-     * from:
-     *  {
-     *    "one": ["a", "b"],
-     *    "two": ["c", "d"],
-     *  }
-     *
-     * to:
-     *  [
-     *    { one: "a", two: "c" },
-     *    { ohe: "b", two: "d" }
-     *  ]
-     */
-    const output = new Array(playerCount).fill(0).map((l, index) => {
-      const data = Object.keys(values).reduce((acc, key) => {
-        return { ...acc, [key]: values[key][index] };
-      }, {});
-
-      return data;
-    });
-
-    console.log(`${playerCount} players registered:`, output);
+    const data = this.createDataCollection(values);
+    console.log(`${this.state.playerCount} players registered:`, data);
   };
 
   render() {
@@ -105,12 +109,6 @@ class RaidReport extends React.Component {
             </div>
           </Well>
           <PlayerList count={this.state.playerCount} />
-          <FormControl
-            componentClass="textarea"
-            value={JSON.stringify(this.state.playerData)}
-            readOnly
-            bsClass="hidden"
-          />
           <Button bsStyle="success" type="submit">
             Submit
           </Button>
