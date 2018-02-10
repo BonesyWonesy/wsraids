@@ -1,6 +1,6 @@
 import React from "react";
 import PlayerList from "./PlayerList.js";
-import { Grid, FormGroup, ControlLabel, Panel, Button, Well } from "react-bootstrap";
+import { ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from "react-bootstrap";
 import Datetime from "react-datetime";
 import getFormData from "get-form-data";
 
@@ -97,14 +97,15 @@ class RaidReport extends React.Component {
           </Well>
           <Well>
             <ControlLabel>Number of Raiders: {this.state.playerCount}</ControlLabel>
-            <div>
+            <br />
+            <ButtonGroup>
               <Button bsSize="large" bsStyle="danger" onClick={this.addRemovePlayerCount(-1)}>
                 -
               </Button>
               <Button bsSize="large" bsStyle="success" onClick={this.addRemovePlayerCount(1)}>
                 +
               </Button>
-            </div>
+            </ButtonGroup>
           </Well>
           <PlayerList count={this.state.playerCount} />
           <Button bsStyle="success" type="submit">
