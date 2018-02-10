@@ -1,7 +1,8 @@
 {
   "name": "wsraids.com",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
+  "contributors": ["Jason Runta", "Daryl Roberts <daryl.roberts@gmail.com>"],
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chartkick": "^2.2.4",
