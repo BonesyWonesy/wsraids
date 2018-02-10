@@ -1,16 +1,6 @@
 import React from "react";
 import PlayerList from "./PlayerList.js";
-import {
-  Grid,
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  HelpBlock,
-  Panel,
-  Button,
-  Label,
-  Well,
-} from "react-bootstrap";
+import { Grid, FormGroup, ControlLabel, FormControl, Panel, Button, Well } from "react-bootstrap";
 import Datetime from "react-datetime";
 import getFormData from "get-form-data";
 

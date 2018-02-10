@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import {
-  Button,
-  ButtonGroup,
-  ButtonToolbar,
-  Panel,
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  Radio,
-} from "react-bootstrap";
+import { Panel, FormControl } from "react-bootstrap";
 import TeamSelect from "./TeamSelect.js";
 import FirstRaid from "./FirstRaid";
 

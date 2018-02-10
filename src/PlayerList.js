@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PlayerEntry from "./PlayerEntry.js";
 
 export default class PlayerList extends Component {

@@ -13,7 +13,6 @@
     "react-chartkick": "^0.1.6",
     "react-datetime": "^2.13.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0",
     "react-toggle": "^4.0.2"
   },
   "scripts": {
@@ -21,5 +20,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "1.1.0",
+    "eslint-plugin-react-app": "^1.0.2"
   }
 }

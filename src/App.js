@@ -75,7 +75,6 @@ class App extends Component {
                 </p>
                 <p> This page provides info about the currently targeted gym and stats.</p>
                 <p>
-                  {" "}
                   If you'd like to contribute to the stats, please fill out a really quick report.
                 </p>
                 <div className="text-center">
