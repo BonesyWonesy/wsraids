@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import logo from './logo.svg';
-import './App.css';
-import { Button, Panel, Modal } from 'react-bootstrap';
-import RaidReport from './RaidReport.js';
-import Content from './Content.js';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import logo from "./logo.svg";
+import "./App.css";
+import { Button, Panel, Modal } from "react-bootstrap";
+import RaidReport from "./RaidReport.js";
+import Content from "./Content.js";
 
 let playerCount = 0;
 let raidedPrior = false;
@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentType: 'none'
+      contentType: "submit",
     };
 
     this.dismissModal = this.dismissModal.bind(this);
@@ -23,12 +23,12 @@ class App extends Component {
   componentWillUnmount() {}
 
   dismissModal() {
-    this.switchContent('info');
+    this.switchContent("info");
   }
 
   switchContent(type) {
     this.setState({
-      contentType: type
+      contentType: type,
     });
   }
 
@@ -45,16 +45,16 @@ class App extends Component {
           <Button
             bsStyle="primary"
             onClick={() => {
-              this.switchContent('info');
+              this.switchContent("info");
             }}
           >
-            {' '}
-            Raid Info{' '}
+            {" "}
+            Raid Info{" "}
           </Button>
           <Button
             bsStyle="default"
             onClick={() => {
-              this.switchContent('submit');
+              this.switchContent("submit");
             }}
           >
             Submit Report
@@ -62,7 +62,7 @@ class App extends Component {
         </div>
         <br />
         <Content type={this.state.contentType} />
-        <Modal show={this.state.contentType === 'none'}>
+        <Modal show={this.state.contentType === "none"}>
           <Modal.Body>
             <Panel bsStyle="success">
               <Panel.Heading>
@@ -70,13 +70,16 @@ class App extends Component {
               </Panel.Heading>
               <Panel.Body>
                 <p>
-                  The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an EX raid
-                  for that gym.
+                  The idea is that we need roughly 60-80 unique accounts to raid at a specific gym
+                  to trigger an EX raid for that gym.
                 </p>
                 <p> This page provides info about the currently targeted gym and stats.</p>
-                <p> If you'd like to contribute to the stats, please fill out a really quick report.</p>
+                <p>
+                  {" "}
+                  If you'd like to contribute to the stats, please fill out a really quick report.
+                </p>
                 <div className="text-center">
-                  <Button onClick={this.dismissModal}>Dismiss</Button>{' '}
+                  <Button onClick={this.dismissModal}>Dismiss</Button>{" "}
                 </div>
               </Panel.Body>
             </Panel>

@@ -1,111 +1,80 @@
-import React from 'react';
-import PlayerList from './PlayerList.js';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Panel, Button, Label, Well } from 'react-bootstrap';
-import Datetime from 'react-datetime';
-
-const CustomOverlay = style => ({ classNames, selectedDay, children }) => (
-  <div className={classNames.overlayWrapper}>
-    <div className={classNames.overlay} style={style}>
-      {children}
-    </div>
-  </div>
-);
-
-class PlayerData {
-  constructor() {
-    this.id = 0;
-    this.playerName = 'unnamed';
-    this.team = 0;
-    this.isUnique = false;
-  }
-}
+import React from "react";
+import PlayerList from "./PlayerList.js";
+import {
+  Grid,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  HelpBlock,
+  Panel,
+  Button,
+  Label,
+  Well,
+} from "react-bootstrap";
+import Datetime from "react-datetime";
+import getFormData from "get-form-data";
 
 class RaidReport extends React.Component {
   constructor(props) {
     super(props);
 
-    this.addRemovePlayerCount = this.addRemovePlayerCount.bind(this);
-    this.submitReport = this.submitReport.bind(this);
-    this.handleGetDate = this.handleGetDate.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.getReportData = this.getReportData.bind(this);
-    this.updatePlayer = this.updatePlayer.bind(this);
-
     const today = new Date();
 
     this.state = {
-      playerCount: 0,
-      needsDate: false,
+      playerCount: 1,
       time: {
         date: today,
         iso: today.toISOString(),
-        formatted: today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear()
+        formatted: today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear(),
       },
-      playerData: []
     };
   }
 
-  updatePlayer(data) {
-    this.setState(prevState => {
-      let playersData = prevState.playerData;
-      let playerEntry = new PlayerData();
+  addRemovePlayerCount = change => e => {
+    e.preventDefault();
+    this.setState(prevState => ({ playerCount: prevState.playerCount + change }));
+  };
 
-      playerEntry.team = data.team;
-      playerEntry.playerName = data.playerName;
-      playerEntry.isUnique = data.isUnique;
-      playerEntry.id = data.id;
+  submitReport = e => {
+    e.preventDefault();
+    const values = getFormData(e.target);
+    const { playerCount } = this.state;
 
-      playersData[data.id] = playerEntry;
+    if (playerCount === 1) {
+      console.log("1 player registered:", values);
+      return;
+    }
 
-      console.log(JSON.stringify(playersData));
+    /**
+     * loop through an empty array of the same length as the player count and
+     * fill it with the data from the form.
+     *
+     * from:
+     *  {
+     *    "one": ["a", "b"],
+     *    "two": ["c", "d"],
+     *  }
+     *
+     * to:
+     *  [
+     *    { one: "a", two: "c" },
+     *    { ohe: "b", two: "d" }
+     *  ]
+     */
+    const output = new Array(playerCount).fill(0).map((l, index) => {
+      const data = Object.keys(values).reduce((acc, key) => {
+        return { ...acc, [key]: values[key][index] };
+      }, {});
 
-      return { playerData: playersData };
+      return data;
     });
-  }
 
-  getReportData() {
-    return JSON.stringify(this.state.playerData);
-  }
-
-  handleGetDate() {
-    this.setState({
-      needsDate: true
-    });
-  }
-
-  handleDateChange(val) {
-    console.dir(val);
-  }
-
-  addRemovePlayerCount(count) {
-    this.setState(prevState => {
-      const playerCount = prevState.playerCount + count < 0 ? 0 : prevState.playerCount + count;
-      let tmp = prevState.playerData.slice();
-      tmp.length = playerCount;
-
-      if (playerCount > prevState.playerData.length) {
-        tmp.fill(new PlayerData(), prevState.playerData.length, playerCount);
-        for (let i = prevState.playerData.length; i < playerCount; ++i) {
-          tmp[i].id = i;
-        }
-      }
-
-      console.log(JSON.stringify(tmp));
-
-      return {
-        playerCount,
-        playerData: tmp
-      };
-    });
-  }
-
-  submitReport(d) {
-    console.dir(this.state.playerData);
-  }
+    console.log(`${playerCount} players registered:`, output);
+  };
 
   render() {
     return (
-      <div>
+      <Grid>
         <Panel bsStyle="success">
           <Panel.Heading>
             <Panel.Title componentClass="h3">About</Panel.Title>
@@ -114,52 +83,49 @@ class RaidReport extends React.Component {
             <ul>
               <li>All fields are optional except # of players</li>
               <li>Please choose the correct date (Defaults to today) for the report</li>
-              <li>Please have the correct number of players you contributed or are accounting for</li>
+              <li>
+                Please have the correct number of players you contributed or are accounting for
+              </li>
               <li>Please don't abuse the submits, we don't want to skew our own results</li>
             </ul>
           </Panel.Body>
         </Panel>
-        <Well bsSize="small">
-          Date: <Datetime value={this.state.time.date} dateFormat="ddd, MMMM Do YYYY" timeFormat={false} />
-        </Well>
-        <Well>
-          Number of Raiders: {this.state.playerCount}
-          <br />
-          <Button
-            bsSize="large"
-            bsStyle="danger"
-            onClick={e => {
-              this.addRemovePlayerCount(-1);
-            }}
-          >
-            -
-          </Button>
-          <Button
-            bsSize="large"
-            bsStyle="success"
-            onClick={e => {
-              this.addRemovePlayerCount(1);
-            }}
-          >
-            +
-          </Button>
-        </Well>
-        <br />
-        <PlayerList count={this.state.playerCount} updatePlayer={this.updatePlayer} />
 
-        <form>
+        <form onSubmit={this.submitReport}>
+          <Well bsSize="small">
+            <FormGroup>
+              <ControlLabel>Date</ControlLabel>
+              <Datetime
+                name="raidtime"
+                value={this.state.time.date}
+                dateFormat="ddd, MMMM Do YYYY"
+                timeFormat={false}
+              />
+            </FormGroup>
+          </Well>
+          <Well>
+            <ControlLabel>Number of Raiders: {this.state.playerCount}</ControlLabel>
+            <div>
+              <Button bsSize="large" bsStyle="danger" onClick={this.addRemovePlayerCount(-1)}>
+                -
+              </Button>
+              <Button bsSize="large" bsStyle="success" onClick={this.addRemovePlayerCount(1)}>
+                +
+              </Button>
+            </div>
+          </Well>
+          <PlayerList count={this.state.playerCount} />
           <FormControl
             componentClass="textarea"
             value={JSON.stringify(this.state.playerData)}
             readOnly
             bsClass="hidden"
           />
-          <Button bsStyle="success" className="Submit" type="submit" onClick={this.submitReport}>
-            {' '}
+          <Button bsStyle="success" type="submit">
             Submit
           </Button>
         </form>
-      </div>
+      </Grid>
     );
   }
 }
