@@ -45,12 +45,7 @@ export default class TeamSelect extends Component {
             >
               I
             </Button>
-            <Button
-              bsStyle="danger"
-              bsSize="large"
-              disabled={this.state.team === 3}
-              onClick={this.handleTeamSelect(3)}
-            >
+            <Button bsStyle="danger" bsSize="large" disabled={this.state.team === 3} onClick={this.handleTeamSelect(3)}>
               V
             </Button>
           </ButtonGroup>

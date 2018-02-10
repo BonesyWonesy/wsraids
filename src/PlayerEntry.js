@@ -9,13 +9,7 @@ class PlayerEntry extends Component {
       <Panel bsStyle="success">
         <Panel.Heading>
           <Panel.Title componentClass="h3">
-            <FormControl
-              id="formControlsPlayerName"
-              type="text"
-              label=""
-              name="playerName"
-              placeholder="Player name"
-            />
+            <FormControl id="formControlsPlayerName" type="text" label="" name="playerName" placeholder="Player name" />
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>

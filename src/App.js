@@ -65,14 +65,11 @@ class App extends Component {
               </Panel.Heading>
               <Panel.Body>
                 <p>
-                  The idea is that we need roughly 60-80 unique accounts to raid at a specific gym
-                  to trigger an EX raid for that gym.
+                  The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an EX raid
+                  for that gym.
                 </p>
                 <p>This page provides info about the currently targeted gym and stats.</p>
-                <p>
-                  If you&apos;d like to contribute to the stats, please fill out a really quick
-                  report.
-                </p>
+                <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
                 <div className="text-center">
                   <Button onClick={this.dismissModal}>Dismiss</Button>
                 </div>
