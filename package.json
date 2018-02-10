@@ -1,23 +1,37 @@
 {
   "name": "wsraids.com",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
+  "contributors": ["Jason Runta", "Daryl Roberts <daryl.roberts@gmail.com>"],
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chartkick": "^2.2.4",
+    "get-form-data": "^2.0.0",
+    "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-chartkick": "^0.1.6",
     "react-datetime": "^2.13.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0",
     "react-toggle": "^4.0.2"
   },
+  "devDependencies": {
+    "eslint-plugin-react-app": "^1.0.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "prettier": "^1.10.2",
+    "react-scripts": "1.1.0"
+  },
+  "lint-staged": {
+    "*.{js,json}": ["yarn format", "git add"]
+  },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write",
+    "precommit": "lint-staged",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   }
 }
