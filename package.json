@@ -9,6 +9,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "get-form-data": "^2.0.0",
+    "handlebars": "^4.0.11",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "react": "^16.2.0",
@@ -27,8 +28,7 @@
     "react-scripts": "1.1.0"
   },
   "lint-staged": {
-    "*.{js,json}": [
-    ]
+    "*.{js,json}": []
   },
   "scripts": {
     "build": "react-scripts build",

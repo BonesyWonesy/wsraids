@@ -50,8 +50,7 @@ class CustomTooltip extends Component {
 
 const StackedBarChart = () => {
   	return (
-    	<BarChart width={600} height={300} data={data}
-            margin={{top: 20, right: 30, left: 20, bottom: 5}}>
+    	<BarChart width={600} height={300} data={data}>
        <XAxis dataKey="name"/>
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
@@ -102,7 +101,7 @@ const generateDummyData = (playerName, team) => {
   const numAccounts = getRandomArbitrary(2, 10);
 
   for (let i = 0; i < numAccounts; ++i) {
-    const newStat = new RaidStat(playerName, team, { year: 2018, month: 2, day: getRandomArbitrary(6, 10) }, i === 0);
+    const newStat = new RaidStat(playerName, team, { year: 2018, month: 2, day: getRandomArbitrary(3, 10) }, i === 0);
     dummyRaidStats.push(newStat);
   }
 };

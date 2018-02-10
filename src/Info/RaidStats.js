@@ -8,6 +8,7 @@ export default class RaidStats extends Component {
       <div>
         <Panel bsStyle="success">
           <Panel.Heading>
+            Current Attendance Stats
           </Panel.Heading>
           <Panel.Body>
             <DummyChart />
