@@ -80,7 +80,9 @@ class RaidReport extends React.Component {
               <li>
                 Please have the correct number of players you contributed or are accounting for
               </li>
-              <li>Please don't abuse the submits, we don't want to skew our own results</li>
+              <li>
+                Please don&apos;t abuse the submits, we don&apos;t want to skew our own results
+              </li>
             </ul>
           </Panel.Body>
         </Panel>

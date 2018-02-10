@@ -12,7 +12,7 @@ export default class ComponentName extends React.Component {
   render() {
     return (
       <div>
-        For the week, is this the character's first time raiding here?
+        For the week, is this the character&apos;s first time raiding here?
         <br />
         <Toggle onChange={this.handleChange} />
         <input type="hidden" name="firstRaid" value={JSON.stringify(this.state.checked)} />
