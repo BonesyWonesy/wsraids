@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { FormGroup, ControlLabel, ButtonGroup, Button } from "react-bootstrap";
+import React, { Component } from 'react';
+import { FormGroup, ControlLabel, ButtonGroup, Button } from 'react-bootstrap';
 
 // not sure if you still want these to be numbers, or just strings, but I left
 // them as numbers.
@@ -8,7 +8,7 @@ export default class TeamSelect extends Component {
     team: 0,
   };
 
-  teamMap = ["Harmony", "Mystic", "Instinct", "Valor"];
+  teamMap = ['Harmony', 'Mystic', 'Instinct', 'Valor'];
 
   handleTeamSelect = team => e => {
     e.preventDefault();

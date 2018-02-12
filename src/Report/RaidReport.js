@@ -1,12 +1,11 @@
-import React from "react";
-import PlayerList from "./PlayerList.js";
-import { ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from "react-bootstrap";
-import Datetime from "react-datetime";
-import getFormData from "get-form-data";
+import React from 'react';
+import PlayerList from './PlayerList.js';
+import { ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from 'react-bootstrap';
+import Datetime from 'react-datetime';
+import getFormData from 'get-form-data';
 import axios from 'axios';
 
 const today = new Date();
-
 
 class RaidReport extends React.Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class RaidReport extends React.Component {
 
     this.state = {
       playerCount: 1,
-      reportDate: today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear()
+      reportDate: today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear(),
     };
   }
 
@@ -43,7 +42,7 @@ class RaidReport extends React.Component {
     const data = new Array(this.state.playerCount).fill(0).map((l, index) => {
       const output = Object.keys(values).reduce((acc, key) => {
         let propertyValue = values[key][index];
-        if ( key == 'playerName' && !propertyValue ) {
+        if (key == 'playerName' && !propertyValue) {
           propertyValue = 'unnamed';
         }
         return { ...acc, [key]: propertyValue, date: this.state.reportDate };
@@ -55,16 +54,16 @@ class RaidReport extends React.Component {
     return data;
   };
 
-  onDateSelect = (moment) => {
-    if ( typeof moment === 'string' ) {
+  onDateSelect = moment => {
+    if (typeof moment === 'string') {
       //error
       return;
     }
 
     this.setState({
-      reportDate: moment.format('YYYY MM DD')
-    });    
-  }
+      reportDate: moment.format('YYYY MM DD'),
+    });
+  };
 
   submitReport = e => {
     console.log('submitReport');
@@ -76,13 +75,14 @@ class RaidReport extends React.Component {
     }
 
     const data = this.createDataCollection(values);
-    axios.post('http://localhost:8116/reportraid', data)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios
+      .post('http://localhost:8116/reportraid', data)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   render() {

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Panel, FormControl } from "react-bootstrap";
-import TeamSelect from "./TeamSelect.js";
-import FirstRaid from "./FirstRaid";
+import React, { Component } from 'react';
+import { Panel, FormControl } from 'react-bootstrap';
+import TeamSelect from './TeamSelect.js';
+import FirstRaid from './FirstRaid';
 
 class PlayerEntry extends Component {
   render() {

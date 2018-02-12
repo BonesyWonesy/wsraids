@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Glyphicon, Button } from 'react-bootstrap';
 import RaidStats from './RaidStats.js';
 import TotemPole from '../Locations/totempole.js';
@@ -17,7 +17,11 @@ export default class RaidInfo extends Component {
         {'   '}
         <span>{raidMap.loc.address}</span>
         <br />
-        <Button href={`https://www.google.com/maps/dir/Current+Location/${raidMap.loc.lat},${raidMap.loc.long}`} target="_blank">
+        <Button
+          alt={raidMap.names.gym}
+          href={`https://www.google.com/maps/dir/Current+Location/${raidMap.loc.lat},${raidMap.loc.long}`}
+          target="_blank"
+        >
           Get Directions
         </Button>
         <RaidStats />

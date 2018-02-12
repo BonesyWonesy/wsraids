@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Button, Panel, Modal } from "react-bootstrap";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import RaidReport from "./Report/RaidReport";
-import RaidInfo from "./Info/RaidInfo";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import { Button, Panel, Modal } from 'react-bootstrap';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import RaidReport from './Report/RaidReport';
+import RaidInfo from './Info/RaidInfo';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentType: "none",
+      contentType: 'none',
     };
 
     this.dismissModal = this.dismissModal.bind(this);
   }
 
   dismissModal() {
-    this.switchContent("info");
+    this.switchContent('info');
   }
 
   switchContent(type) {
@@ -49,7 +49,7 @@ class App extends Component {
           <Route path="/info" component={RaidInfo} />
           <Route path="/report" component={RaidReport} />
 
-          <Modal show={this.state.contentType === "none"}>
+          <Modal show={this.state.contentType === 'none'}>
             <Modal.Body>
               <Panel bsStyle="success">
                 <Panel.Heading>
@@ -63,7 +63,9 @@ class App extends Component {
                   <p>This page provides info about the currently targeted gym and stats.</p>
                   <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
                   <div className="text-center">
-                  <Link to="/info"><Button onClick={this.dismissModal}>Dismiss</Button></Link>
+                    <Link to="/info">
+                      <Button onClick={this.dismissModal}>Dismiss</Button>
+                    </Link>
                   </div>
                 </Panel.Body>
               </Panel>
