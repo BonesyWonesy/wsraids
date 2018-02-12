@@ -7,6 +7,7 @@
     "Daryl Roberts <daryl.roberts@gmail.com>"
   ],
   "dependencies": {
+    "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
     "get-form-data": "^2.0.0",
     "handlebars": "^4.0.11",
@@ -18,6 +19,7 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-toggle": "^4.0.2",
+    "react-virtualized": "^9.18.5",
     "recharts": "^1.0.0-beta.10"
   },
   "devDependencies": {

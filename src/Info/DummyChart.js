@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Panel, Modal } from 'react-bootstrap';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 
 const dummyRaidStats = [];
 const dummyPlayers = [
@@ -48,9 +49,9 @@ class CustomTooltip extends Component {
 };
 
 
-const StackedBarChart = () => {
+const StackedBarChart = props => {
   	return (
-    	<BarChart width={600} height={300} data={data}>
+    	<BarChart width={props.width} height={300} data={data}>
        <XAxis dataKey="name"/>
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
@@ -112,6 +113,12 @@ const raidStats = collate(dummyRaidStats);
  
 export default class DummyChart extends Component {
   render() {
-    return ( <StackedBarChart /> );
+    return (
+      <AutoSizer disableHeight>
+        {({ width }) => {
+          return <StackedBarChart width={width} />
+        }}
+      </AutoSizer>
+    );
   }
 }

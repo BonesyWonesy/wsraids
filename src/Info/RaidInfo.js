@@ -4,11 +4,7 @@ import RaidStats from './RaidStats.js';
 import TotemPole from '../Locations/totempole.js';
 import FairmountPlayground from '../Locations/fairmountplayground.js';
 
-
 const raidMap = new FairmountPlayground();
-
-
-
 
 export default class RaidInfo extends Component {
   render() {
@@ -20,6 +16,7 @@ export default class RaidInfo extends Component {
         <Glyphicon glyph="map-marker" />
         {'   '}
         <span>{raidMap.loc.address}</span>
+        <br />
         <Button href={`https://www.google.com/maps/dir/Current+Location/${raidMap.loc.lat},${raidMap.loc.long}`} target="_blank">
           Get Directions
         </Button>

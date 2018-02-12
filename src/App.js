@@ -15,9 +15,6 @@ class App extends Component {
 
     this.dismissModal = this.dismissModal.bind(this);
   }
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   dismissModal() {
     this.switchContent("info");
@@ -41,7 +38,7 @@ class App extends Component {
           </div>
           <div className="text-center">
             <Link to="/info">
-              <Button bsStyle="primary">Raid Info</Button>
+              <Button bsStyle="default">Raid Info</Button>
             </Link>
             <Link to="/report">
               <Button bsStyle="default">Submit Report</Button>
@@ -66,7 +63,7 @@ class App extends Component {
                   <p>This page provides info about the currently targeted gym and stats.</p>
                   <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
                   <div className="text-center">
-                    <Button onClick={this.dismissModal}>Dismiss</Button>
+                  <Link to="/info"><Button onClick={this.dismissModal}>Dismiss</Button></Link>
                   </div>
                 </Panel.Body>
               </Panel>

@@ -3,20 +3,18 @@ import PlayerList from "./PlayerList.js";
 import { ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from "react-bootstrap";
 import Datetime from "react-datetime";
 import getFormData from "get-form-data";
+import axios from 'axios';
+
+const today = new Date();
+
 
 class RaidReport extends React.Component {
   constructor(props) {
     super(props);
 
-    const today = new Date();
-
     this.state = {
       playerCount: 1,
-      time: {
-        date: today,
-        iso: today.toISOString(),
-        formatted: today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear(),
-      },
+      reportDate: today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear()
     };
   }
 
@@ -44,7 +42,11 @@ class RaidReport extends React.Component {
   createDataCollection = values => {
     const data = new Array(this.state.playerCount).fill(0).map((l, index) => {
       const output = Object.keys(values).reduce((acc, key) => {
-        return { ...acc, [key]: values[key][index] };
+        let propertyValue = values[key][index];
+        if ( key == 'playerName' && !propertyValue ) {
+          propertyValue = 'unnamed';
+        }
+        return { ...acc, [key]: propertyValue, date: this.state.reportDate };
       }, {});
 
       return output;
@@ -53,15 +55,34 @@ class RaidReport extends React.Component {
     return data;
   };
 
+  onDateSelect = (moment) => {
+    if ( typeof moment === 'string' ) {
+      //error
+      return;
+    }
+
+    this.setState({
+      reportDate: moment.format('YYYY MM DD')
+    });    
+  }
+
   submitReport = e => {
+    console.log('submitReport');
     e.preventDefault();
     const values = getFormData(e.target);
 
-    if (this.state.playerCount === 1) {
+    if (this.state.playerCount === 0) {
       return;
     }
 
     const data = this.createDataCollection(values);
+    axios.post('http://localhost:8116/reportraid', data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   render() {
@@ -87,9 +108,11 @@ class RaidReport extends React.Component {
               <ControlLabel>Date</ControlLabel>
               <Datetime
                 name="raidtime"
-                value={this.state.time.date}
+                defaultValue={today}
                 dateFormat="ddd, MMMM Do YYYY"
+                closeOnSelect={true}
                 timeFormat={false}
+                onChange={this.onDateSelect}
               />
             </FormGroup>
           </Well>

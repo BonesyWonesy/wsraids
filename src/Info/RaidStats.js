@@ -6,14 +6,8 @@ export default class RaidStats extends Component {
   render() {
     return (
       <div>
-        <Panel bsStyle="success">
-          <Panel.Heading>
-            Current Attendance Stats
-          </Panel.Heading>
-          <Panel.Body>
-            <DummyChart />
-          </Panel.Body>
-        </Panel>
+        <h3>Current Attendance Stats: </h3>
+        <DummyChart />
       </div>
     );
   }
