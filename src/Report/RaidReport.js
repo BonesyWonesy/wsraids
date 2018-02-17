@@ -6,14 +6,21 @@ import getFormData from 'get-form-data';
 import axios from 'axios';
 
 const today = new Date();
+const DEBUG = true;
+const url = DEBUG ? 'localhost' : 'wsraids.com';
+const port = 8116;
+
+let urlPOST = `http://${url}:${port}/reportraid`;
 
 class RaidReport extends React.Component {
   constructor(props) {
     super(props);
 
+    let month = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : today.getMonth().toString();
+
     this.state = {
       playerCount: 1,
-      reportDate: today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear(),
+      reportDate: `${today.getFullYear()}-${month}-${today.getDate()}`,
     };
   }
 
@@ -42,8 +49,9 @@ class RaidReport extends React.Component {
     const data = new Array(this.state.playerCount).fill(0).map((l, index) => {
       const output = Object.keys(values).reduce((acc, key) => {
         let propertyValue = values[key][index];
-        if (key == 'playerName' && !propertyValue) {
-          propertyValue = 'unnamed';
+        if (key === 'playerName') {
+          if (!propertyValue) propertyValue = 'unnamed';
+          else console.log(propertyValue);
         }
         return { ...acc, [key]: propertyValue, date: this.state.reportDate };
       }, {});
@@ -61,12 +69,11 @@ class RaidReport extends React.Component {
     }
 
     this.setState({
-      reportDate: moment.format('YYYY MM DD'),
+      reportDate: moment.format('YYYY-MM-DD'),
     });
   };
 
   submitReport = e => {
-    console.log('submitReport');
     e.preventDefault();
     const values = getFormData(e.target);
 
@@ -76,7 +83,7 @@ class RaidReport extends React.Component {
 
     const data = this.createDataCollection(values);
     axios
-      .post('http://localhost:8116/reportraid', data)
+      .post(urlPOST, data)
       .then(function(response) {
         console.log(response);
       })

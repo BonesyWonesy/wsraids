@@ -15,9 +15,9 @@
       "properties": {
         "width": { "type": "number" },
         "height": { "type": "number" },
-        "fov": { "type": "number:"},
-        "heading": { "type": "number"},
-        "pitch": { "type": "number"}
+        "fov": { "type": "number:" },
+        "heading": { "type": "number" },
+        "pitch": { "type": "number" }
       }
     },
 
@@ -25,8 +25,7 @@
       "type": "object",
       "properties": {
         "gym": { "type": "string" },
-        "common": {"type": "array", "items": { "type": "string" } },
-        ""
+        "common": { "type": "array", "items": { "type": "string" } }
       }
     }
   },

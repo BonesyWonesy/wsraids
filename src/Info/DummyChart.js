@@ -81,9 +81,9 @@ class RaidStat {
 const collate = raidStats => {
   raidStats.forEach(stat => {
     let team = 'harmony';
-    team = stat.team == 1 ? 'mystic' : team;
-    team = stat.team == 2 ? 'instinct' : team;
-    team = stat.team == 3 ? 'valor' : team;
+    team = stat.team === 1 ? 'mystic' : team;
+    team = stat.team === 2 ? 'instinct' : team;
+    team = stat.team === 3 ? 'valor' : team;
 
     data[stat.day][team] += 1;
   });
@@ -106,7 +106,7 @@ dummyPlayers.forEach(e => {
   generateDummyData(e.name, e.team);
 });
 
-const raidStats = collate(dummyRaidStats);
+collate(dummyRaidStats);
 
 export default class DummyChart extends Component {
   render() {
