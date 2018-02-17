@@ -6,12 +6,6 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
 
-const DEBUG = true;
-const location = DEBUG ? 'localhost' : 'wsraids.com';
-const port = 8116;
-
-const urlGET = `http://${location}:${port}/raidinfo`;
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,24 +16,7 @@ class App extends Component {
     this.dismissModal = this.dismissModal.bind(this);
   }
 
-  componentDidMount() {
-    /*fetch(urlGET)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            items: result.items,
-          });
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );*/
-  }
+  componentDidMount() {}
 
   dismissModal() {
     this.switchContent('info');

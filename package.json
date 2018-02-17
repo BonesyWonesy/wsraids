@@ -38,6 +38,7 @@
     "format": "prettier --write",
     "precommit": "lint-staged",
     "start": "react-scripts start",
+    "startdev": "DEBUG=true react-scripts start",
     "test": "react-scripts test --env=jsdom"
   }
 }

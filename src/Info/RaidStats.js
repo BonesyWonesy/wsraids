@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import DummyChart from './DummyChart.js';
+// import DummyChart from './DummyChart.js';
 import PopulationChart from './PopulationChart.js';
 import axios from 'axios';
 import moment from 'moment';
 
 const today = moment().format('YYYY-MM-DD');
-const DEBUG = true;
-const url = DEBUG ? 'localhost' : 'wsraids.com';
-const port = DEBUG ? 8116 : 9556;
+const url = process.env.DEBUG ? 'localhost' : 'wsraids.com';
+const port = process.env.DEBUG ? 8116 : 9556;
 
 let urlGET = `http://${url}:${port}/raiddata/${today}`;
 
