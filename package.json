@@ -2,10 +2,7 @@
   "name": "wsraids.com",
   "version": "0.1.1",
   "private": true,
-  "contributors": [
-    "Jason Runta",
-    "Daryl Roberts <daryl.roberts@gmail.com>"
-  ],
+  "contributors": ["Jason Runta", "Daryl Roberts <daryl.roberts@gmail.com>"],
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
@@ -38,7 +35,6 @@
     "format": "prettier --write",
     "precommit": "lint-staged",
     "start": "react-scripts start",
-    "startdev": "DEBUG=true react-scripts start",
     "test": "react-scripts test --env=jsdom"
   }
 }

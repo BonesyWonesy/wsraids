@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-// import DummyChart from './DummyChart.js';
+//import DummyChart from './DummyChart.js';
 import PopulationChart from './PopulationChart.js';
 import axios from 'axios';
 import moment from 'moment';
 
+// @TODO: Configs
 const today = moment().format('YYYY-MM-DD');
-const url = process.env.DEBUG ? 'localhost' : 'wsraids.com';
-const port = process.env.DEBUG ? 8116 : 9556;
+const url = false ? 'localhost' : 'wsraids.com';
+const port = false ? 8116 : 9556;
 
-let urlGET = `http://${url}:${port}/raiddata/${today}`;
+const urlGET = `http://${url}:${port}/raiddata/${today}`;
 
 export default class RaidStats extends Component {
   constructor(props) {
@@ -24,9 +25,6 @@ export default class RaidStats extends Component {
     axios
       .get(urlGET)
       .then(function(response) {
-        console.log("Got Response back! Here's the data!");
-        console.dir(response.data);
-
         stats.setState({
           raidData: response.data,
         });
