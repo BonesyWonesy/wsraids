@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import moment from 'moment';
-import { isEmpty, forIn, sortedIndexBy } from 'lodash';
+import { isEmpty, forIn } from 'lodash';
 
 class CustomTooltip extends Component {
   render() {
@@ -49,9 +49,9 @@ const ProcessData = function(dataSet) {
       for (let i = 0; i < value.length; ++i) {
         let entry = value[i];
         let team = 'harmony';
-        team = parseInt(entry.playerTeam, 10) == 1 ? 'mystic' : team;
-        team = parseInt(entry.playerTeam, 10) == 2 ? 'instinct' : team;
-        team = parseInt(entry.playerTeam, 10) == 3 ? 'valor' : team;
+        team = parseInt(entry.playerTeam, 10) === 1 ? 'mystic' : team;
+        team = parseInt(entry.playerTeam, 10) === 2 ? 'instinct' : team;
+        team = parseInt(entry.playerTeam, 10) === 3 ? 'valor' : team;
         dateData[team] += 1;
         chartData[key] = dateData;
       }

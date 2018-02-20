@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerList from './PlayerList.js';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Modal, ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import getFormData from 'get-form-data';

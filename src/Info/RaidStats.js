@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import DummyChart from './DummyChart.js';
 import PopulationChart from './PopulationChart.js';
+import UniquePlayerChart from './UniquePlayerChart.js';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -38,6 +39,7 @@ export default class RaidStats extends Component {
         <div>
           <h3>Current Attendance Stats: </h3>
           <PopulationChart data={this.state.raidData} />
+          <UniquePlayerChart data={this.state.raidData} />
         </div>
         <div />
       </div>
