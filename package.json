@@ -2,7 +2,10 @@
   "name": "wsraids.com",
   "version": "0.1.1",
   "private": true,
-  "contributors": ["Jason Runta", "Daryl Roberts <daryl.roberts@gmail.com>"],
+  "contributors": [
+    "Jason Runta",
+    "Daryl Roberts <daryl.roberts@gmail.com>"
+  ],
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
@@ -12,6 +15,7 @@
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-datetime": "^2.13.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",

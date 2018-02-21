@@ -85,7 +85,7 @@ export default class UniquePlayerChart extends Component {
         <h3>Total Unique Players: {totalUnique}</h3>
         <AutoSizer disableHeight>
           {({ width }) => {
-            return <Chart width={width} data={ProcessData(this.props.data)} />;
+            return <Chart width={width} data={processedData} />;
           }}
         </AutoSizer>
       </div>

@@ -40,10 +40,14 @@ class App extends Component {
           </div>
           <div className="text-center">
             <Link to="/info">
-              <Button bsStyle="default">Raid Info</Button>
+              <Button bsStyle="default" bsSize="large">
+                Raid Info
+              </Button>
             </Link>
             <Link to="/report">
-              <Button bsStyle="default">Submit Report</Button>
+              <Button bsStyle="default" bsSize="large">
+                Submit Report
+              </Button>
             </Link>
           </div>
           <br />
@@ -51,28 +55,34 @@ class App extends Component {
           <Route path="/info" component={RaidInfo} />
           <Route path="/report" component={RaidReport} />
 
-          <Modal show={this.state.contentType === 'none'}>
-            <Modal.Body>
-              <Panel bsStyle="success">
-                <Panel.Heading>
-                  <Panel.Title componentClass="h3">Purpose</Panel.Title>
-                </Panel.Heading>
-                <Panel.Body>
-                  <p>
-                    The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an EX
-                    raid for that gym.
-                  </p>
-                  <p>This page provides info about the currently targeted gym and stats.</p>
-                  <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
-                  <div className="text-center">
-                    <Link to="/info">
-                      <Button onClick={this.dismissModal}>Dismiss</Button>
-                    </Link>
-                  </div>
-                </Panel.Body>
-              </Panel>
-            </Modal.Body>
-          </Modal>
+          <Route
+            exact={true}
+            path="/"
+            render={() => (
+              <Modal show={this.state.contentType === 'none'}>
+                <Modal.Body>
+                  <Panel bsStyle="success">
+                    <Panel.Heading>
+                      <Panel.Title componentClass="h3">Purpose</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body>
+                      <p>
+                        The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an
+                        EX raid for that gym.
+                      </p>
+                      <p>This page provides info about the currently targeted gym and stats.</p>
+                      <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
+                      <div className="text-center">
+                        <Link to="/info">
+                          <Button onClick={this.dismissModal}>Dismiss</Button>
+                        </Link>
+                      </div>
+                    </Panel.Body>
+                  </Panel>
+                </Modal.Body>
+              </Modal>
+            )}
+          />
         </main>
       </BrowserRouter>
     );

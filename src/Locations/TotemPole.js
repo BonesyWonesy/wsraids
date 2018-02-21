@@ -15,6 +15,8 @@ export default class TotemPole extends GymLocation {
       fov: 120,
       heading: 10,
       pitch: 10,
+      lat: this.loc.lat,
+      long: this.loc.long,
     };
     this.names = {
       gym: 'Totem Pole',

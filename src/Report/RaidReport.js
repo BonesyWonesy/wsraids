@@ -1,7 +1,18 @@
 import React from 'react';
 import PlayerList from './PlayerList.js';
 import { Link } from 'react-router-dom';
-import { Modal, ButtonGroup, Grid, FormGroup, ControlLabel, Panel, Button, Well } from 'react-bootstrap';
+import {
+  Modal,
+  ButtonGroup,
+  Grid,
+  FormGroup,
+  ControlLabel,
+  Panel,
+  Button,
+  Well,
+  MenuItem,
+  SplitButton,
+} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import getFormData from 'get-form-data';
 import axios from 'axios';
@@ -23,6 +34,7 @@ class RaidReport extends React.Component {
       reportDate: `${today.getFullYear()}-${month}-${today.getDate()}`,
       successModal: 'hide',
       errorModal: 'hide',
+      raidLevel: 0,
     };
   }
 
@@ -55,13 +67,19 @@ class RaidReport extends React.Component {
           if (!propertyValue) propertyValue = 'unnamed';
           else console.log(propertyValue);
         }
-        return { ...acc, [key]: propertyValue, date: this.state.reportDate };
+        return { ...acc, [key]: propertyValue, date: this.state.reportDate, raidLevel: this.state.raidLevel };
       }, {});
 
       return output;
     });
 
     return data;
+  };
+
+  onRaidLevelSelect = (eventKey, event) => {
+    this.setState({
+      raidLevel: eventKey,
+    });
   };
 
   onDateSelect = moment => {
@@ -136,6 +154,29 @@ class RaidReport extends React.Component {
                   timeFormat={false}
                   onChange={this.onDateSelect}
                 />
+                <br />
+                <br />
+                <ControlLabel>Raid Level:</ControlLabel>
+                <SplitButton title={this.state.raidLevel} pullRight id="split-button-pull-right">
+                  <MenuItem eventKey="0" onSelect={this.onRaidLevelSelect}>
+                    N/A
+                  </MenuItem>
+                  <MenuItem eventKey="1" onSelect={this.onRaidLevelSelect}>
+                    1
+                  </MenuItem>
+                  <MenuItem eventKey="2" onSelect={this.onRaidLevelSelect}>
+                    2
+                  </MenuItem>
+                  <MenuItem eventKey="3" onSelect={this.onRaidLevelSelect}>
+                    3
+                  </MenuItem>
+                  <MenuItem eventKey="4" onSelect={this.onRaidLevelSelect}>
+                    4
+                  </MenuItem>
+                  <MenuItem eventKey="5" onSelect={this.onRaidLevelSelect}>
+                    5
+                  </MenuItem>
+                </SplitButton>
               </FormGroup>
             </Well>
             <Well>

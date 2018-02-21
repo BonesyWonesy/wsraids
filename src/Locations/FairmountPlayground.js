@@ -15,6 +15,8 @@ export default class FairmountPlayground extends GymLocation {
       fov: 120,
       heading: 100,
       pitch: 10,
+      lat: this.loc.lat,
+      long: this.loc.long,
     };
     this.names = {
       gym: 'Fairmount Playground',
