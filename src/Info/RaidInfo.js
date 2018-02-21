@@ -39,7 +39,7 @@ export default class RaidInfo extends Component {
               Get Directions
             </Button>
           </p>
-        </Jumbotron>;
+        </Jumbotron>
         <RaidStats />
       </div>
     );
