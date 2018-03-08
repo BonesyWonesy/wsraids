@@ -27,11 +27,13 @@ class RaidReport extends React.Component {
   constructor(props) {
     super(props);
 
-    let month = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : today.getMonth().toString();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : today.getMonth().toString();
+    const day = today.getDate() < 10 ? '0' + today.getDate().toString() : today.getDate().toString();
 
     this.state = {
       playerCount: 1,
-      reportDate: `${today.getFullYear()}-${month}-${today.getDate()}`,
+      reportDate: `${year}-${month}-${day}`,
       successModal: 'hide',
       errorModal: 'hide',
       raidLevel: 0,
@@ -62,7 +64,7 @@ class RaidReport extends React.Component {
   createDataCollection = values => {
     const data = new Array(this.state.playerCount).fill(0).map((l, index) => {
       const output = Object.keys(values).reduce((acc, key) => {
-        let propertyValue = values[key][index];
+        let propertyValue = Array.isArray(values[key]) ? values[key][index] : values[key];
         if (key === 'playerName') {
           if (!propertyValue) propertyValue = 'unnamed';
           else console.log(propertyValue);
