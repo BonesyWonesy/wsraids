@@ -6,6 +6,13 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
 
+import TotemPole from './Locations/TotemPole.js';
+// import FairmountPlayground from '../Locations/FairmountPlayground.js';
+// import DelridgePlayground from './Locations/DelridgePlayground.js';
+import SSCCChineseGarden from './Locations/SSCCChineseGarden.js';
+
+const raidMaps = [new TotemPole(), new SSCCChineseGarden()];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +59,8 @@ class App extends Component {
           </div>
           <br />
 
-          <Route path="/info" component={RaidInfo} />
-          <Route path="/report" component={RaidReport} />
+          <Route path="/info" render={() => <RaidInfo maps={raidMaps} />} />
+          <Route path="/report" render={() => <RaidReport maps={raidMaps} />} />
 
           <Route
             exact={true}

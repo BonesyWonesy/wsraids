@@ -32,6 +32,8 @@ class RaidReport extends React.Component {
     const day = today.getDate() < 10 ? '0' + today.getDate().toString() : today.getDate().toString();
 
     this.state = {
+      locations: props.maps,
+      selectedLocation: 0,
       playerCount: 1,
       reportDate: `${year}-${month}-${day}`,
       successModal: 'hide',
@@ -69,13 +71,25 @@ class RaidReport extends React.Component {
           if (!propertyValue) propertyValue = 'unnamed';
           else console.log(propertyValue);
         }
-        return { ...acc, [key]: propertyValue, date: this.state.reportDate, raidLevel: this.state.raidLevel };
+        return {
+          ...acc,
+          [key]: propertyValue,
+          date: this.state.reportDate,
+          raidLevel: this.state.raidLevel,
+          raidLocation: this.state.locations[this.state.selectedLocation].names.gym,
+        };
       }, {});
 
       return output;
     });
 
     return data;
+  };
+
+  onRaidMapSelect = (eventKey, event) => {
+    this.setState({
+      selectedLocation: eventKey,
+    });
   };
 
   onRaidLevelSelect = (eventKey, event) => {
@@ -156,6 +170,21 @@ class RaidReport extends React.Component {
                   timeFormat={false}
                   onChange={this.onDateSelect}
                 />
+                <br />
+                <br />
+                <ControlLabel>Raid Location:</ControlLabel>
+                <SplitButton
+                  title={this.state.locations[this.state.selectedLocation].names.gym}
+                  pullRight
+                  id="split-button-pull-right"
+                >
+                  <MenuItem eventKey="0" onSelect={this.onRaidMapSelect}>
+                    {this.state.locations[0].names.gym}
+                  </MenuItem>
+                  <MenuItem eventKey="1" onSelect={this.onRaidMapSelect}>
+                    {this.state.locations[1].names.gym}
+                  </MenuItem>
+                </SplitButton>
                 <br />
                 <br />
                 <ControlLabel>Raid Level:</ControlLabel>
