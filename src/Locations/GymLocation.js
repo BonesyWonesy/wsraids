@@ -1,5 +1,3 @@
-import Handlebars from 'handlebars';
-
 /**
  * Represents the common information in all gym locations.
  *
@@ -29,6 +27,16 @@ export default class GymLocation {
       gym: '',
       common: [],
     };
+
+    this.uniqueChartData = {
+      totalUnique: 0,
+      chartData: [
+        { name: 'harmony', value: 0, fill: '#8eceb077' },
+        { name: 'mystic', value: 0, fill: '#0d62db77' },
+        { name: 'instinct', value: 0, fill: '#e5e21477' },
+        { name: 'valor', value: 0, fill: '#db2c0d77' },
+      ],
+    };
   }
 
   /**
@@ -36,29 +44,20 @@ export default class GymLocation {
    * the properties about the gym.
    */
   getMapsLink() {
-    const maps_template = Handlebars.compile(
-      'https://maps.googleapis.com/maps/api/streetview' +
-        '?size={{width}}x{{height}}' +
-        '&location={{lat}},{{long}}' +
-        '&fov={{fov}}' +
-        '&heading={{heading}}' +
-        '&pitch={{pitch}}' +
-        '&key=AIzaSyDyP9AjluBnbeEGrVd63-nDXcAf_6QqDiU'
-    );
-
     // For latitude on longitude I'll use the location data
     // if it exists
-    const mapLink = maps_template({
-      width: this.picture.width,
-      height: this.picture.height,
-      lat: this.picture.lat == 0 && this.loc.lat !== 0 ? this.loc.lat : this.picture.lat,
-      long: this.picture.long == 0 && this.loc.long !== 0 ? this.loc.long : this.picture.long,
-      fov: this.picture.fov,
-      heading: this.picture.heading,
-      pitch: this.picture.pitch,
-    });
 
-    console.log(mapLink);
+    const lat = this.picture.lat === 0 && this.loc.lat !== 0 ? this.loc.lat : this.picture.lat;
+    const long = this.picture.long === 0 && this.loc.long !== 0 ? this.loc.long : this.picture.long;
+    const mapLink =
+      'https://maps.googleapis.com/maps/api/streetview' +
+      `?size=${this.picture.width}x${this.picture.height}` +
+      `&location=${lat},${long}` +
+      `&fov=${this.picture.fov}` +
+      `&heading=${this.picture.heading}` +
+      `&pitch=${this.picture.pitch}` +
+      '&key=AIzaSyDyP9AjluBnbeEGrVd63-nDXcAf_6QqDiU';
+
     return mapLink;
   }
 }

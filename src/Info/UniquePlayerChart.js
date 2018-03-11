@@ -3,8 +3,6 @@ import { Tooltip, Pie, PieChart, Cell } from 'recharts';
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import { isEmpty, forIn } from 'lodash';
 
-let totalUnique = 0;
-
 /**
  *
  * @param {Object} dataSet Array of objects containing at least the following data structure:
@@ -13,37 +11,32 @@ let totalUnique = 0;
  *   team: number,  (0-3)
  *   date: string, YYYY-MM-DD format
  * }
+ * @param {Array} locations Collection of 'GymLocation' objects. Modifies the uniqueChartData
+ * on those objects.
  */
-const ProcessData = function(dataSet) {
-  totalUnique = 0;
-  let chartData = [
-    { name: 'harmony', value: 0, fill: '#8eceb077' },
-    { name: 'mystic', value: 0, fill: '#0d62db77' },
-    { name: 'instinct', value: 0, fill: '#e5e21477' },
-    { name: 'valor', value: 0, fill: '#db2c0d77' },
-  ];
+const ProcessData = function(dataSet, locations = []) {
+  forIn(dataSet, (aPlayerData, date) => {
+    // Iterate through all players to determine unique times
+    for (let p = 0; p < aPlayerData.length; ++p) {
+      const player = aPlayerData[p];
 
-  if (dataSet) {
-    forIn(dataSet, (value, key) => {
-      let dateData = chartData[key];
+      const isFirst =
+        player.firstRaid.toLowerCase() === 't' ||
+        player.firstRaid.toLowerCase() === 'true' ||
+        parseInt(player.firstRaid, 10) === 1;
 
-      for (let i = 0; i < value.length; ++i) {
-        const entry = value[i];
-        if (
-          entry.firstRaid.toLowerCase() === 't' ||
-          entry.firstRaid.toLowerCase() === 'true' ||
-          parseInt(entry.firstRaid, 10) === 1
-        ) {
-          chartData[entry.playerTeam].value += 1;
-          ++totalUnique;
+      if (isFirst && player.raidLocation) {
+        // Find matching location
+        for (var l = 0; l < locations.length; ++l) {
+          if (locations[l].names.gym === player.raidLocation) {
+            locations[l].uniqueChartData.chartData[player.playerTeam].value += 1;
+            locations[l].uniqueChartData.totalUnique += 1;
+            break;
+          }
         }
-
-        chartData[key] = dateData;
       }
-    });
-  }
-
-  return chartData;
+    }
+  });
 };
 
 const Chart = props => {
@@ -76,18 +69,27 @@ export default class UniquePlayerChart extends Component {
     };
   }
   render() {
-    var processedData = ProcessData(this.props.data);
     if (isEmpty(this.props.data)) {
       return null;
     }
+    ProcessData(this.props.data, this.props.locations);
+
     return (
       <div>
-        <h3>Total Unique Players: {totalUnique}</h3>
-        <AutoSizer disableHeight>
-          {({ width }) => {
-            return <Chart width={width} data={processedData} />;
-          }}
-        </AutoSizer>
+        {this.props.locations.map((location, idx) => {
+          return (
+            <div key={idx}>
+              <h3>
+                Total Unique Players for {location.names.gym}: {location.uniqueChartData.totalUnique}
+              </h3>
+              <AutoSizer disableHeight>
+                {({ width }) => {
+                  return <Chart width={width} data={location.uniqueChartData.chartData} />;
+                }}
+              </AutoSizer>
+            </div>
+          );
+        })}
       </div>
     );
   }

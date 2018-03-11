@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import mewtwo from './Mewtwo.png';
 import './App.css';
 import { Button, Panel, Modal } from 'react-bootstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
-
 import TotemPole from './Locations/TotemPole.js';
 // import FairmountPlayground from '../Locations/FairmountPlayground.js';
 // import DelridgePlayground from './Locations/DelridgePlayground.js';
-import SSCCChineseGarden from './Locations/SSCCChineseGarden.js';
+import StoneKoi from './Locations/StoneKoi.js';
 
-const raidMaps = [new TotemPole(), new SSCCChineseGarden()];
+const raidMaps = [new TotemPole(), new StoneKoi()];
 
 class App extends Component {
   constructor(props) {
@@ -41,8 +41,9 @@ class App extends Component {
         <main>
           <div className="App">
             <header className="App-header">
-              West Seattle Raids <br />
-              <img src={logo} className="App-logo" alt="logo" />
+              West Seattle Raids
+              <img src={logo} className="App-logo" alt="wsraids.com" />
+              <img src={mewtwo} height="100px" alt="mewtwo" />
             </header>
           </div>
           <div className="text-center">

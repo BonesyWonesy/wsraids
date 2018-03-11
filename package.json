@@ -10,7 +10,6 @@
     "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
     "get-form-data": "^2.0.0",
-    "handlebars": "^4.0.11",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "react": "^16.2.0",
