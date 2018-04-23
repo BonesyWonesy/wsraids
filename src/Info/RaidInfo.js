@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Glyphicon, Button, Jumbotron, Tabs, Tab } from 'react-bootstrap';
+import { Button, Jumbotron, Tabs, Tab } from 'react-bootstrap';
 import RaidStats from './RaidStats.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import MapIcon from '../map.png';
+import CopyIcon from '../copy.png';
 
 export default class RaidInfo extends Component {
   constructor(props) {
@@ -26,15 +28,14 @@ export default class RaidInfo extends Component {
                     <img alt={'Directions to ' + gym.names.gym} src={gym.getMapsLink()} />
                     <br />
                     <br />
-                    <Glyphicon glyph="map-marker" />
+                    <img src={MapIcon} alt={gym.loc.address} />
                     <span>{gym.loc.address}</span>
                     <br />
                   </p>
                   <p>
                     <CopyToClipboard text={gym.loc.address}>
                       <Button bsSize="large">
-                        Copy Address
-                        <Glyphicon glyph="copy" />
+                        Copy Address <img src={CopyIcon} alt="Copy Address" />
                       </Button>
                     </CopyToClipboard>
                     <Button

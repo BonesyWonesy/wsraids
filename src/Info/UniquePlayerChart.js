@@ -72,6 +72,9 @@ export default class UniquePlayerChart extends Component {
     if (isEmpty(this.props.data)) {
       return null;
     }
+    this.props.locations.forEach(element => {
+      element.resetUnique();
+    });
     ProcessData(this.props.data, this.props.locations);
 
     return (

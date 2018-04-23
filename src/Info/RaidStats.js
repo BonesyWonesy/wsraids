@@ -7,8 +7,9 @@ import moment from 'moment';
 
 // @TODO: Configs
 const today = moment().format('YYYY-MM-DD');
-const url = false ? 'localhost' : 'wsraids.com';
-const port = false ? 8116 : 9556;
+const debug = false;
+const url = debug ? 'localhost' : 'wsraids.com';
+const port = debug ? 8116 : 9556;
 
 const urlGET = `http://${url}:${port}/raiddata/${today}`;
 

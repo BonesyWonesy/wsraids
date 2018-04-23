@@ -18,8 +18,9 @@ import getFormData from 'get-form-data';
 import axios from 'axios';
 
 const today = new Date();
-const url = false ? 'localhost' : 'wsraids.com';
-const port = false ? 8116 : 9556;
+const debug = false;
+const url = debug ? 'localhost' : 'wsraids.com';
+const port = debug ? 8116 : 9556;
 
 let urlPOST = `http://${url}:${port}/reportraid`;
 
@@ -178,12 +179,13 @@ class RaidReport extends React.Component {
                   pullRight
                   id="split-button-pull-right"
                 >
-                  <MenuItem eventKey="0" onSelect={this.onRaidMapSelect}>
-                    {this.state.locations[0].names.gym}
-                  </MenuItem>
-                  <MenuItem eventKey="1" onSelect={this.onRaidMapSelect}>
-                    {this.state.locations[1].names.gym}
-                  </MenuItem>
+                  {this.state.locations.map((e, i) => {
+                    return (
+                      <MenuItem eventKey={i} key={i} onSelect={this.onRaidMapSelect}>
+                        {this.state.locations[i].names.gym}
+                      </MenuItem>
+                    );
+                  })}
                 </SplitButton>
                 <br />
                 <br />

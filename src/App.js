@@ -7,11 +7,16 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
 import TotemPole from './Locations/TotemPole.js';
-// import FairmountPlayground from '../Locations/FairmountPlayground.js';
-// import DelridgePlayground from './Locations/DelridgePlayground.js';
+import HighPointLittleLibrary from './Locations/HighPointLittleLibrary.js';
+import ECHughes from './Locations/ECHughes.js';
+import FairmountPlayground from './Locations/FairmountPlayground.js';
+import BelvederePark from './Locations/BelvederePark.js';
+import DelridgePlayground from './Locations/DelridgePlayground.js';
 import StoneKoi from './Locations/StoneKoi.js';
+import DragonflyPark from './Locations/DragonflyPark.js';
+import SchmitzPark from './Locations/SchmitzPark.js';
 
-const raidMaps = [new TotemPole(), new StoneKoi()];
+const raidMaps = [new TotemPole(), new HighPointLittleLibrary(), new BelvederePark(), new ECHughes()];
 
 class App extends Component {
   constructor(props) {
@@ -47,6 +52,12 @@ class App extends Component {
             </header>
           </div>
           <div className="text-center">
+            <h4>
+              Seattle-based EX gym locations & comfirmations can be found{' '}
+              <a href="http://bit.ly/kentmap" target="_blank">
+                here{' '}
+              </a>
+            </h4>
             <Link to="/info">
               <Button bsStyle="default" bsSize="large">
                 Raid Info

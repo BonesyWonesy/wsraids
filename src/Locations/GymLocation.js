@@ -28,6 +28,10 @@ export default class GymLocation {
       common: [],
     };
 
+    this.resetUnique();
+  }
+
+  resetUnique() {
     this.uniqueChartData = {
       totalUnique: 0,
       chartData: [
