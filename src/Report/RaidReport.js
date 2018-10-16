@@ -33,8 +33,8 @@ class RaidReport extends React.Component {
     super(props);
 
     const year = today.getFullYear();
-    const month =
-      today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : (today.getMonth() + 1).toString();
+    const realMonth = today.getMonth() + 1;
+    const month = realMonth < 10 ? '0' + realMonth.toString() : realMonth.toString();
     const day = today.getDate() < 10 ? '0' + today.getDate().toString() : today.getDate().toString();
 
     this.state = {
@@ -60,7 +60,7 @@ class RaidReport extends React.Component {
 
   addRemovePlayerCount = change => e => {
     e.preventDefault();
-    this.setState(prevState => ({ playerCount: prevState.playerCount + change }));
+    this.setState(prevState => ({ playerCount: Math.max(1, prevState.playerCount + change) }));
   };
 
   /**

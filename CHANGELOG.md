@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.5
+
+### Fixed
+
+* Issue where you could select < 1 reported player
+
 ## 0.1.4
 
 ### Added
