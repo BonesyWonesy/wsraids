@@ -2,21 +2,33 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import mewtwo from './Mewtwo.png';
 import './App.css';
-import { Button, Panel, Modal } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
-import TotemPole from './Locations/TotemPole.js';
-import HighPointLittleLibrary from './Locations/HighPointLittleLibrary.js';
-import ECHughes from './Locations/ECHughes.js';
-import FairmountPlayground from './Locations/FairmountPlayground.js';
+import PokeTrader from './PokeTrader/UserDetails';
+
 import BelvederePark from './Locations/BelvederePark.js';
 import DelridgePlayground from './Locations/DelridgePlayground.js';
-import StoneKoi from './Locations/StoneKoi.js';
 import DragonflyPark from './Locations/DragonflyPark.js';
+import ECHughes from './Locations/ECHughes.js';
+import FairmountPlayground from './Locations/FairmountPlayground.js';
+import HighPointLittleLibrary from './Locations/HighPointLittleLibrary.js';
 import SchmitzPark from './Locations/SchmitzPark.js';
+// import SSCCChineseGarden from './Locations/SSCCChineseGarden.js';
+// import StoneKoi from './Locations/StoneKoi.js';
+import TotemPole from './Locations/TotemPole.js';
 
-const raidMaps = [new TotemPole(), new HighPointLittleLibrary(), new BelvederePark(), new ECHughes()];
+const raidMaps = [
+  new BelvederePark(),
+  new DragonflyPark(),
+  new FairmountPlayground(),
+  new HighPointLittleLibrary(),
+  new TotemPole(),
+  new DelridgePlayground(),
+  new ECHughes(),
+  new SchmitzPark(),
+];
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +53,29 @@ class App extends Component {
   }
 
   render() {
+    const options = {
+      trades: (
+        <Link to="/trades">
+          <Button color="info" size="lg">
+            Trades
+          </Button>
+        </Link>
+      ),
+      raidInfo: (
+        <Link to="/info">
+          <Button color="info" size="lg">
+            Raid Info
+          </Button>
+        </Link>
+      ),
+      raidReport: (
+        <Link to="/report">
+          <Button color="info" size="lg">
+            Submit Report
+          </Button>
+        </Link>
+      ),
+    };
     return (
       <BrowserRouter>
         <main>
@@ -53,55 +88,21 @@ class App extends Component {
           </div>
           <div className="text-center">
             <h4>
-              Seattle-based EX gym locations & comfirmations can be found{' '}
-              <a href="http://bit.ly/kentmap" target="_blank">
+              Seattle-based EX gym locations & confirmations can be found{' '}
+              <a href="http://bit.ly/kentmap" target="_blank" rel="noopener noreferrer">
                 here{' '}
               </a>
             </h4>
-            <Link to="/info">
-              <Button bsStyle="default" bsSize="large">
-                Raid Info
-              </Button>
-            </Link>
-            <Link to="/report">
-              <Button bsStyle="default" bsSize="large">
-                Submit Report
-              </Button>
-            </Link>
+            {options.raidInfo}
+            {options.raidReport}
           </div>
           <br />
 
           <Route path="/info" render={() => <RaidInfo maps={raidMaps} />} />
           <Route path="/report" render={() => <RaidReport maps={raidMaps} />} />
+          <Route path="/trades" render={() => <PokeTrader />} />
 
-          <Route
-            exact={true}
-            path="/"
-            render={() => (
-              <Modal show={this.state.contentType === 'none'}>
-                <Modal.Body>
-                  <Panel bsStyle="success">
-                    <Panel.Heading>
-                      <Panel.Title componentClass="h3">Purpose</Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Body>
-                      <p>
-                        The idea is that we need roughly 60-80 unique accounts to raid at a specific gym to trigger an
-                        EX raid for that gym.
-                      </p>
-                      <p>This page provides info about the currently targeted gym and stats.</p>
-                      <p>If you&apos;d like to contribute to the stats, please fill out a really quick report.</p>
-                      <div className="text-center">
-                        <Link to="/info">
-                          <Button onClick={this.dismissModal}>Dismiss</Button>
-                        </Link>
-                      </div>
-                    </Panel.Body>
-                  </Panel>
-                </Modal.Body>
-              </Modal>
-            )}
-          />
+          <Route exact={true} path="/" render={() => <RaidInfo maps={raidMaps} />} />
         </main>
       </BrowserRouter>
     );

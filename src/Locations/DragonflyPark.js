@@ -4,6 +4,8 @@ export default class DragonflyPark extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 25;
+
     this.loc = {
       lat: 47.5666474,
       long: -122.3681286,

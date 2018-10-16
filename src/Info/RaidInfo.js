@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Jumbotron, Tabs, Tab } from 'react-bootstrap';
+import { Button, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import RaidStats from './RaidStats.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import MapIcon from '../map.png';
 import CopyIcon from '../copy.png';
+import '../App.css';
 
 export default class RaidInfo extends Component {
   constructor(props) {
@@ -11,17 +12,49 @@ export default class RaidInfo extends Component {
 
     this.state = {
       raidMaps: props.maps,
+      adtiveTab: '1',
     };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+      });
+    }
   }
 
   render() {
+    this.state.raidMaps.sort((left, right) => {
+      return left.s13CellId < right.s13CellId;
+    });
+
     return (
       <div className="text-center">
         <h2> Current EX Gym Targets: </h2>
-        <Tabs defaultActiveKey={0} id="uncontrolled-tab-example">
+        <p>(Colored by matching S13 Cells) </p>
+        <Nav tabs>
           {this.state.raidMaps.map((gym, idx) => {
             return (
-              <Tab eventKey={idx} title={gym.names.gym} key={idx}>
+              <NavItem key={idx}>
+                <NavLink
+                  className={`s13${gym.s13CellId}`}
+                  onClick={() => {
+                    this.toggle(idx.toString());
+                  }}
+                >
+                  {gym.names.gym}
+                </NavLink>
+              </NavItem>
+            );
+          })}
+        </Nav>
+        <TabContent activeTab={this.state.activeTab}>
+          {this.state.raidMaps.map((gym, idx) => {
+            return (
+              <TabPane tabId={idx.toString()}>
                 <Jumbotron>
                   <h1>{gym.names.gym}</h1>
                   <p>
@@ -34,12 +67,13 @@ export default class RaidInfo extends Component {
                   </p>
                   <p>
                     <CopyToClipboard text={gym.loc.address}>
-                      <Button bsSize="large">
+                      <Button size="lg" color="info">
                         Copy Address <img src={CopyIcon} alt="Copy Address" />
                       </Button>
                     </CopyToClipboard>
                     <Button
-                      bsSize="large"
+                      size="lg"
+                      color="info"
                       alt={gym.names.gym}
                       href={`https://www.google.com/maps/dir/Current+Location/${gym.loc.lat},${gym.loc.long}`}
                       target="_blank"
@@ -48,10 +82,10 @@ export default class RaidInfo extends Component {
                     </Button>
                   </p>
                 </Jumbotron>
-              </Tab>
+              </TabPane>
             );
           })}
-        </Tabs>
+        </TabContent>
         <RaidStats locations={this.state.raidMaps} />
       </div>
     );

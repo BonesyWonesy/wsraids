@@ -11,6 +11,9 @@ export default class GymLocation {
       address: '',
     };
 
+    // S13 cell id
+    this.s13CellId = -1;
+
     // Display settings to generate the street view image
     this.picture = {
       height: 0,

@@ -4,6 +4,8 @@ export default class ECHughes extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 44;
+
     this.loc = {
       lat: 47.53364,
       long: -122.36943400000001,

@@ -82,7 +82,7 @@ export default class UniquePlayerChart extends Component {
         {this.props.locations.map((location, idx) => {
           return (
             <div key={idx}>
-              <h3>
+              <h3 className={`s13${location.s13CellId}`}>
                 Total Unique Players for {location.names.gym}: {location.uniqueChartData.totalUnique}
               </h3>
               <AutoSizer disableHeight>

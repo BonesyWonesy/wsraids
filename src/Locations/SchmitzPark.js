@@ -4,6 +4,8 @@ export default class SchmitzPark extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 10;
+
     this.loc = {
       lat: 47.5771,
       long: -122.4033,

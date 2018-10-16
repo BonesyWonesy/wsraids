@@ -4,6 +4,8 @@ export default class HighPointLittleLibrary extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 31;
+
     this.loc = {
       lat: 47.549477,
       long: -122.3714388,

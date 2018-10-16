@@ -3,16 +3,19 @@ import PlayerList from './PlayerList.js';
 import { Link } from 'react-router-dom';
 import {
   Modal,
+  ModalBody,
   ButtonGroup,
-  Grid,
   FormGroup,
-  ControlLabel,
-  Panel,
+  Card,
+  CardHeader,
+  CardBody,
+  CardText,
   Button,
-  Well,
-  MenuItem,
-  SplitButton,
-} from 'react-bootstrap';
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 import Datetime from 'react-datetime';
 import getFormData from 'get-form-data';
 import axios from 'axios';
@@ -29,7 +32,8 @@ class RaidReport extends React.Component {
     super(props);
 
     const year = today.getFullYear();
-    const month = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : today.getMonth().toString();
+    const month =
+      today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1).toString() : (today.getMonth() + 1).toString();
     const day = today.getDate() < 10 ? '0' + today.getDate().toString() : today.getDate().toString();
 
     this.state = {
@@ -40,8 +44,18 @@ class RaidReport extends React.Component {
       successModal: 'hide',
       errorModal: 'hide',
       raidLevel: 0,
+      dropdownLocation: false,
+      dropdownLevel: false,
     };
   }
+
+  toggleDropDown = dropName => {
+    this.setState(prevState => {
+      let dropDownState = {};
+      dropDownState[`dropdown${dropName}`] = !prevState[`dropdown${dropName}`];
+      return dropDownState;
+    });
+  };
 
   addRemovePlayerCount = change => e => {
     e.preventDefault();
@@ -144,25 +158,21 @@ class RaidReport extends React.Component {
   render() {
     return (
       <div>
-        <Grid>
-          <Panel bsStyle="success">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">About</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body>
-              <ul>
-                <li>All fields are optional except # of players</li>
-                <li>Please choose the correct date (Defaults to today) for the report</li>
-                <li>Please have the correct number of players you contributed or are accounting for</li>
-                <li>Please don&apos;t abuse the submits, we don&apos;t want to skew our own results</li>
-              </ul>
-            </Panel.Body>
-          </Panel>
+        <Card>
+          <CardHeader>About</CardHeader>
+          <CardBody>
+            <CardText>All fields are optional except # of players</CardText>
+            <CardText>Please choose the correct date (Defaults to today) for the report</CardText>
+            <CardText>Please have the correct number of players you contributed or are accounting for</CardText>
+            <CardText>Please don&apos;t abuse the submits, we don&apos;t want to skew our own results</CardText>
+          </CardBody>
+        </Card>
 
-          <form onSubmit={this.submitReport}>
-            <Well bsSize="small">
-              <FormGroup>
-                <ControlLabel>Date</ControlLabel>
+        <form onSubmit={this.submitReport}>
+          <FormGroup>
+            <Card>
+              <CardHeader>Date of Raid</CardHeader>
+              <CardBody>
                 <Datetime
                   name="raidtime"
                   defaultValue={today}
@@ -171,96 +181,111 @@ class RaidReport extends React.Component {
                   timeFormat={false}
                   onChange={this.onDateSelect}
                 />
-                <br />
-                <br />
-                <ControlLabel>Raid Location:</ControlLabel>
-                <SplitButton
-                  title={this.state.locations[this.state.selectedLocation].names.gym}
-                  pullRight
-                  id="split-button-pull-right"
+              </CardBody>
+            </Card>
+            <Card>
+              <CardHeader>RaidLocation</CardHeader>
+              <CardBody>
+                <ButtonDropdown
+                  isOpen={this.state.dropdownLocation}
+                  toggle={() => {
+                    this.toggleDropDown('Location');
+                  }}
                 >
-                  {this.state.locations.map((e, i) => {
-                    return (
-                      <MenuItem eventKey={i} key={i} onSelect={this.onRaidMapSelect}>
-                        {this.state.locations[i].names.gym}
-                      </MenuItem>
-                    );
-                  })}
-                </SplitButton>
-                <br />
-                <br />
-                <ControlLabel>Raid Level:</ControlLabel>
-                <SplitButton title={this.state.raidLevel} pullRight id="split-button-pull-right">
-                  <MenuItem eventKey="0" onSelect={this.onRaidLevelSelect}>
-                    N/A
-                  </MenuItem>
-                  <MenuItem eventKey="1" onSelect={this.onRaidLevelSelect}>
-                    1
-                  </MenuItem>
-                  <MenuItem eventKey="2" onSelect={this.onRaidLevelSelect}>
-                    2
-                  </MenuItem>
-                  <MenuItem eventKey="3" onSelect={this.onRaidLevelSelect}>
-                    3
-                  </MenuItem>
-                  <MenuItem eventKey="4" onSelect={this.onRaidLevelSelect}>
-                    4
-                  </MenuItem>
-                  <MenuItem eventKey="5" onSelect={this.onRaidLevelSelect}>
-                    5
-                  </MenuItem>
-                </SplitButton>
-              </FormGroup>
-            </Well>
-            <Well>
-              <ControlLabel>Number of Raiders: {this.state.playerCount}</ControlLabel>
-              <br />
+                  <DropdownToggle caret>{this.state.locations[this.state.selectedLocation].names.gym}</DropdownToggle>
+                  <DropdownMenu>
+                    {this.state.locations.map((e, i) => {
+                      return (
+                        <DropdownItem key={`loc${i}`}>
+                          <div onClick={() => this.onRaidMapSelect(i)}>{this.state.locations[i].names.gym}</div>
+                        </DropdownItem>
+                      );
+                    })}
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </CardBody>
+            </Card>
+
+            <Card>
+              <CardHeader>Raid Level</CardHeader>
+              <CardBody>
+                <ButtonDropdown
+                  isOpen={this.state.dropdownLevel}
+                  toggle={() => {
+                    this.toggleDropDown('Level');
+                  }}
+                >
+                  <DropdownToggle caret>{this.state.raidLevel ? this.state.raidLevel : 'N/A'}</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(0)}>N/A</div>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(1)}>1</div>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(2)}>2</div>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(3)}>3</div>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(4)}>4</div>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <div onClick={() => this.onRaidLevelSelect(5)}>5</div>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </CardBody>
+            </Card>
+          </FormGroup>
+
+          <Card>
+            <CardHeader>Number of Raiders: {this.state.playerCount}</CardHeader>
+            <CardBody>
               <ButtonGroup>
-                <Button bsSize="large" bsStyle="danger" onClick={this.addRemovePlayerCount(-1)}>
+                <Button color="danger" size="lg" onClick={this.addRemovePlayerCount(-1)}>
                   -
                 </Button>
-                <Button bsSize="large" bsStyle="success" onClick={this.addRemovePlayerCount(1)}>
+                <Button color="success" size="lg" onClick={this.addRemovePlayerCount(1)}>
                   +
                 </Button>
               </ButtonGroup>
-            </Well>
-            <PlayerList count={this.state.playerCount} />
-            <Button bsStyle="success" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Grid>
+              <PlayerList count={this.state.playerCount} />
+            </CardBody>
+          </Card>
+          <Button color="success" type="submit">
+            Submit
+          </Button>
+        </form>
         <Modal show={this.state.successModal === 'show'}>
-          <Modal.Body>
-            <Panel bsStyle="success">
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">Thanks for your submission</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
+          <ModalBody>
+            <Card>
+              <CardHeader>Thanks for your submission</CardHeader>
+              <CardBody>
                 <p>Go to the main page to see updated stats!</p>
                 <div className="text-center">
                   <Link to="/info">
                     <Button onClick={this.dismissModal}>Dismiss</Button>
                   </Link>
                 </div>
-              </Panel.Body>
-            </Panel>
-          </Modal.Body>
+              </CardBody>
+            </Card>
+          </ModalBody>
         </Modal>
         <Modal show={this.state.errorModal === 'show'}>
-          <Modal.Body>
-            <Panel bsStyle="error">
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">Something went wrong!</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
+          <ModalBody>
+            <Card>
+              <CardHeader>Something went wrong!</CardHeader>
+              <CardBody>
                 <p>Please try again, or let Bonesy know in Discord!</p>
                 <div className="text-center">
                   <Button onClick={this.dismissModal}>Dismiss</Button>
                 </div>
-              </Panel.Body>
-            </Panel>
-          </Modal.Body>
+              </CardBody>
+            </Card>
+          </ModalBody>
         </Modal>
       </div>
     );

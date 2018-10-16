@@ -4,6 +4,8 @@ export default class TotemPole extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 25;
+
     this.loc = {
       lat: 47.5609328,
       long: -122.3757268,

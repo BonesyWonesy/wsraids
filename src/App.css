@@ -42,6 +42,51 @@
   color: #af0000;
 }
 
+.GenderFloat {
+  float: left;
+}
+
+.ShinyPokemonBg {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,05abe0+100;Blue+3D+%23+16 */
+  background: #aec431; /* Old browsers */
+  background: -moz-linear-gradient(top, #fde787 0%, #e1f153 40%, #bfe005 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #fde787 0%, #e1f153 40%, #bfe005 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #fde787 0%,
+    #e1f153 40%,
+    #bfe005 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aec431', endColorstr='#bfe005', GradientType=0); /* IE6-9 */
+}
+
+.PokemonBg {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,05abe0+100;Blue+3D+%23+16 */
+  background: #87e0fd; /* Old browsers */
+  background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #87e0fd 0%,
+    #53cbf1 40%,
+    #05abe0 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87e0fd', endColorstr='#05abe0', GradientType=0); /* IE6-9 */
+}
+
+.DetailsBg {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7c7dc+0,85b2d3+100;Blue+Grey+3D */
+  background: #a7c7dc; /* Old browsers */
+  background: -moz-linear-gradient(top, #a7c7dc 0%, #85b2d3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #a7c7dc 0%, #85b2d3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #a7c7dc 0%,
+    #85b2d3 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a7c7dc', endColorstr='#85b2d3', GradientType=0); /* IE6-9 */
+}
+
 .react-toggle {
   touch-action: pan-x;
 
@@ -420,4 +465,40 @@ td.rdtYear:hover {
 
 .nav-tabs {
   text-align: center;
+}
+
+/* FOR Main Menu Navigation */
+
+/* Active tab */
+.gymNav ul > li.active > a,
+.gymNav ul > li.active > a:hover,
+.gymNav ul > li.active > a:focus {
+  background-color: transparent;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+
+.s1310 {
+  background-color: #f8bbd0;
+}
+
+.s1312 {
+  background-color: #bbdefb;
+}
+
+.s1325 {
+  background-color: #b2dfdb;
+}
+
+.s1331 {
+  background-color: #e1bee7;
+}
+
+.s1339 {
+  background-color: #c5cae9;
+}
+
+.s1344 {
+  background-color: #c8e6c9;
 }

@@ -4,6 +4,8 @@ export default class DelridgePlayground extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 25;
+
     this.loc = {
       lat: 47.563266,
       long: -122.364345,

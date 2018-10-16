@@ -4,6 +4,8 @@ export default class FairmountPlayground extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 31;
+
     this.loc = {
       lat: 47.5540354,
       long: -122.3816351,

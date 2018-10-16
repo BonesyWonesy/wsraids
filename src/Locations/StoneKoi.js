@@ -5,6 +5,8 @@ export default class StoneKoi extends GymLocation {
   constructor() {
     super();
 
+    this.s13CellId = 39;
+
     this.loc = {
       lat: 47.55184599999999,
       long: -122.35194200000001,
@@ -21,7 +23,7 @@ export default class StoneKoi extends GymLocation {
     };
     this.names = {
       gym: 'Stone Koi',
-      common: ['Stone Koi, SSCC Chinese Garden'],
+      common: ['Stone Koi', 'SSCC Chinese Garden'],
     };
   }
 

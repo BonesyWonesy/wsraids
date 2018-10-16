@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, ButtonGroup, Button } from 'react-bootstrap';
+import { FormGroup, Label, ButtonGroup, Button } from 'reactstrap';
 
 // not sure if you still want these to be numbers, or just strings, but I left
 // them as numbers.
@@ -18,34 +18,19 @@ export default class TeamSelect extends Component {
   render() {
     return (
       <FormGroup>
-        <ControlLabel>Team: {this.teamMap[this.state.team]}</ControlLabel>
+        <Label>Team: {this.teamMap[this.state.team]}</Label>
         <div>
           <ButtonGroup>
-            <Button
-              bsStyle="default"
-              bsSize="large"
-              disabled={this.state.team === 0}
-              onClick={this.handleTeamSelect(0)}
-            >
+            <Button color="info" size="lg" disabled={this.state.team === 0} onClick={this.handleTeamSelect(0)}>
               H
             </Button>
-            <Button
-              bsStyle="primary"
-              bsSize="large"
-              disabled={this.state.team === 1}
-              onClick={this.handleTeamSelect(1)}
-            >
+            <Button color="primary" size="lg" disabled={this.state.team === 1} onClick={this.handleTeamSelect(1)}>
               M
             </Button>
-            <Button
-              bsStyle="warning"
-              bsSize="large"
-              disabled={this.state.team === 2}
-              onClick={this.handleTeamSelect(2)}
-            >
+            <Button color="warning" size="lg" disabled={this.state.team === 2} onClick={this.handleTeamSelect(2)}>
               I
             </Button>
-            <Button bsStyle="danger" bsSize="large" disabled={this.state.team === 3} onClick={this.handleTeamSelect(3)}>
+            <Button color="danger" size="lg" disabled={this.state.team === 3} onClick={this.handleTeamSelect(3)}>
               V
             </Button>
           </ButtonGroup>

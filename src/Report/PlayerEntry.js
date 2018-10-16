@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import { Panel, FormControl } from 'react-bootstrap';
 import TeamSelect from './TeamSelect.js';
 import FirstRaid from './FirstRaid';
-
+import { Card, CardHeader, CardBody } from 'reactstrap';
 class PlayerEntry extends Component {
   render() {
+    // <FormGroup id="formControlsPlayerName" type="text" label="" name="playerName" placeholder="Player name" />
     return (
-      <Panel bsStyle="success">
-        <Panel.Heading>
-          <Panel.Title componentClass="h3">
-            <FormControl id="formControlsPlayerName" type="text" label="" name="playerName" placeholder="Player name" />
-          </Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          <TeamSelect />
-        </Panel.Body>
-        <Panel.Footer>
-          <FirstRaid />
-        </Panel.Footer>
-      </Panel>
+      <Card>
+        <CardHeader />
+        <CardBody>
+          <ul>
+            <li>
+              <TeamSelect />
+            </li>
+            <li>
+              <FirstRaid />
+            </li>
+          </ul>
+        </CardBody>
+      </Card>
     );
   }
 }
