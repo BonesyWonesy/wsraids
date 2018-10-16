@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.4
+
+### Added
+
+* Deoxys pic =)
+
+### Changed
+
+* More package updates
+
 ## 0.1.3
 
 ### Added

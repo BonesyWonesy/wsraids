@@ -1,13 +1,11 @@
 {
   "name": "wsraids.com",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
-  "contributors": [
-    "Jason Runta",
-    "Daryl Roberts <daryl.roberts@gmail.com>"
-  ],
+  "contributors": ["Jason Runta", "Daryl Roberts <daryl.roberts@gmail.com>"],
   "dependencies": {
     "axios": "^0.17.1",
+    "bootstrap": "^4.1.3",
     "get-form-data": "^2.0.0",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",

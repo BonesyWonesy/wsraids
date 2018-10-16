@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import mewtwo from './Mewtwo.png';
+import deoxys from './Deoxys.png';
 import './App.css';
 import { Button } from 'reactstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
@@ -82,8 +82,8 @@ class App extends Component {
           <div className="App">
             <header className="App-header">
               West Seattle Raids
+              <img src={deoxys} height="100px" alt="deoxys" />
               <img src={logo} className="App-logo" alt="wsraids.com" />
-              <img src={mewtwo} height="100px" alt="mewtwo" />
             </header>
           </div>
           <div className="text-center">
