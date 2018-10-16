@@ -22,6 +22,22 @@
   font-size: large;
 }
 
+.buttonGrey {
+  text-shadow: 0 1px 0 #fff;
+  border-color: #ccc;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(180deg, #fff 0, #e0e0e0);
+  color: #515151;
+}
+
+.buttonGrey:hover {
+  color: #000;
+}
+
+.navcenter {
+  display: block;
+}
+
 .Team-Harmony {
   background-color: #888888;
   color: #888888;

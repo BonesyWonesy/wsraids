@@ -12,7 +12,7 @@ export default class RaidInfo extends Component {
 
     this.state = {
       raidMaps: props.maps,
-      adtiveTab: '1',
+      activeTab: '1',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -28,14 +28,14 @@ export default class RaidInfo extends Component {
 
   render() {
     this.state.raidMaps.sort((left, right) => {
-      return left.s13CellId < right.s13CellId;
+      return left.s13CellId - right.s13CellId;
     });
 
     return (
       <div className="text-center">
         <h2> Current EX Gym Targets: </h2>
         <p>(Colored by matching S13 Cells) </p>
-        <Nav tabs>
+        <Nav tabs className="navcenter">
           {this.state.raidMaps.map((gym, idx) => {
             return (
               <NavItem key={idx}>
@@ -54,7 +54,7 @@ export default class RaidInfo extends Component {
         <TabContent activeTab={this.state.activeTab}>
           {this.state.raidMaps.map((gym, idx) => {
             return (
-              <TabPane tabId={idx.toString()}>
+              <TabPane tabId={idx.toString()} key={'map' + idx.toString()}>
                 <Jumbotron>
                   <h1>{gym.names.gym}</h1>
                   <p>
@@ -67,13 +67,13 @@ export default class RaidInfo extends Component {
                   </p>
                   <p>
                     <CopyToClipboard text={gym.loc.address}>
-                      <Button size="lg" color="info">
+                      <Button size="lg" className="buttonGrey">
                         Copy Address <img src={CopyIcon} alt="Copy Address" />
                       </Button>
                     </CopyToClipboard>
                     <Button
                       size="lg"
-                      color="info"
+                      className="buttonGrey"
                       alt={gym.names.gym}
                       href={`https://www.google.com/maps/dir/Current+Location/${gym.loc.lat},${gym.loc.long}`}
                       target="_blank"

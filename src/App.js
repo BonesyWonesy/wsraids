@@ -56,21 +56,21 @@ class App extends Component {
     const options = {
       trades: (
         <Link to="/trades">
-          <Button color="info" size="lg">
+          <Button className="buttonGrey" size="lg">
             Trades
           </Button>
         </Link>
       ),
       raidInfo: (
         <Link to="/info">
-          <Button color="info" size="lg">
+          <Button className="buttonGrey" size="lg">
             Raid Info
           </Button>
         </Link>
       ),
       raidReport: (
         <Link to="/report">
-          <Button color="info" size="lg">
+          <Button className="buttonGrey" size="lg">
             Submit Report
           </Button>
         </Link>

@@ -19,6 +19,7 @@ import {
 import Datetime from 'react-datetime';
 import getFormData from 'get-form-data';
 import axios from 'axios';
+import '../report.css';
 
 const today = new Date();
 const debug = false;
@@ -159,7 +160,7 @@ class RaidReport extends React.Component {
     return (
       <div>
         <Card>
-          <CardHeader>About</CardHeader>
+          <CardHeader className="sectionheader">About</CardHeader>
           <CardBody>
             <CardText>All fields are optional except # of players</CardText>
             <CardText>Please choose the correct date (Defaults to today) for the report</CardText>
@@ -171,8 +172,8 @@ class RaidReport extends React.Component {
         <form onSubmit={this.submitReport}>
           <FormGroup>
             <Card>
-              <CardHeader>Date of Raid</CardHeader>
-              <CardBody>
+              <CardHeader className="sectionheader">Date of Raid</CardHeader>
+              <CardBody className="well">
                 <Datetime
                   name="raidtime"
                   defaultValue={today}
@@ -184,8 +185,8 @@ class RaidReport extends React.Component {
               </CardBody>
             </Card>
             <Card>
-              <CardHeader>RaidLocation</CardHeader>
-              <CardBody>
+              <CardHeader className="sectionheader">Raid Location</CardHeader>
+              <CardBody className="well">
                 <ButtonDropdown
                   isOpen={this.state.dropdownLocation}
                   toggle={() => {
@@ -207,8 +208,8 @@ class RaidReport extends React.Component {
             </Card>
 
             <Card>
-              <CardHeader>Raid Level</CardHeader>
-              <CardBody>
+              <CardHeader className="sectionheader">Raid Level</CardHeader>
+              <CardBody className="well">
                 <ButtonDropdown
                   isOpen={this.state.dropdownLevel}
                   toggle={() => {
@@ -242,8 +243,8 @@ class RaidReport extends React.Component {
           </FormGroup>
 
           <Card>
-            <CardHeader>Number of Raiders: {this.state.playerCount}</CardHeader>
-            <CardBody>
+            <CardHeader className="sectionheader">Number of Raiders: {this.state.playerCount}</CardHeader>
+            <CardBody className="well">
               <ButtonGroup>
                 <Button color="danger" size="lg" onClick={this.addRemovePlayerCount(-1)}>
                   -
@@ -259,10 +260,10 @@ class RaidReport extends React.Component {
             Submit
           </Button>
         </form>
-        <Modal show={this.state.successModal === 'show'}>
+        <Modal isOpen={this.state.successModal === 'show'}>
           <ModalBody>
             <Card>
-              <CardHeader>Thanks for your submission</CardHeader>
+              <CardHeader className="successheader">Thanks for your submission</CardHeader>
               <CardBody>
                 <p>Go to the main page to see updated stats!</p>
                 <div className="text-center">
@@ -274,10 +275,10 @@ class RaidReport extends React.Component {
             </Card>
           </ModalBody>
         </Modal>
-        <Modal show={this.state.errorModal === 'show'}>
+        <Modal isOpen={this.state.errorModal === 'show'}>
           <ModalBody>
             <Card>
-              <CardHeader>Something went wrong!</CardHeader>
+              <CardHeader className="failheader">Something went wrong!</CardHeader>
               <CardBody>
                 <p>Please try again, or let Bonesy know in Discord!</p>
                 <div className="text-center">
