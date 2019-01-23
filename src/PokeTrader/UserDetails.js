@@ -2,6 +2,8 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import female from '../Female_black_symbol.svg';
 import male from '../Male_black_symbol.svg';
+import PokemonImages from './ImageImports';
+import CreateTrade from './CreateTrade';
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -13,17 +15,10 @@ export default class Example extends React.Component {
     };
   }
 
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab,
-      });
-    }
-  }
   componentDidMount = () => {
     // $('#example').DataTable();
     this.setState({
-      pokemonList: [] /*
+      pokemonList: [
         {
           num: 307,
           name: 'Meditite',
@@ -60,7 +55,7 @@ export default class Example extends React.Component {
           level: 0,
           shiny: true,
         },
-      ]*/,
+      ],
     });
   };
 
@@ -86,27 +81,6 @@ export default class Example extends React.Component {
 
     return (
       <div>
-        <h3>BonesyWonesy</h3>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              onClick={() => {
-                this.toggle('1');
-              }}
-            >
-              Pokemon I Want
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              onClick={() => {
-                this.toggle('2');
-              }}
-            >
-              Pokemon For Trade
-            </NavLink>
-          </NavItem>
-        </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <Row>
@@ -170,6 +144,17 @@ export default class Example extends React.Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="6">
+                <CreateTrade />
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+      </div>
+    );
+  }
+}
+/*
+<Col sm="6">
                 <Card body>
                   <CardTitle>Special Title Treatment</CardTitle>
                   <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -183,10 +168,4 @@ export default class Example extends React.Component {
                   <Button>Go somewhere</Button>
                 </Card>
               </Col>
-            </Row>
-          </TabPane>
-        </TabContent>
-      </div>
-    );
-  }
-}
+              */

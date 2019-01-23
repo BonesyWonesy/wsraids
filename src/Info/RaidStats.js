@@ -35,8 +35,6 @@ export default class RaidStats extends Component {
   }
 
   render() {
-    // <h3>Current Attendance Stats: </h3>
-    // <PopulationChart data={this.state.raidData} />
     return (
       <div>
         <UniquePlayerChart data={this.state.raidData} locations={this.props.locations} />

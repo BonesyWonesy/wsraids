@@ -6,7 +6,8 @@ import { Button } from 'reactstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RaidReport from './Report/RaidReport';
 import RaidInfo from './Info/RaidInfo';
-import PokeTrader from './PokeTrader/UserDetails';
+import PokeTrader from './PokeTrader/TradeManager';
+import Login from './PokeTrader/Login';
 
 import BelvederePark from './Locations/BelvederePark.js';
 import DelridgePlayground from './Locations/DelridgePlayground.js';
@@ -101,6 +102,7 @@ class App extends Component {
           <Route path="/info" render={() => <RaidInfo maps={raidMaps} />} />
           <Route path="/report" render={() => <RaidReport maps={raidMaps} />} />
           <Route path="/trades" render={() => <PokeTrader />} />
+          <Route path="/login" render={() => <Login />} />
 
           <Route exact={true} path="/" render={() => <RaidInfo maps={raidMaps} />} />
         </main>
